@@ -1,4 +1,0 @@
-MediaHub
-========
-
-Multiuser Media hub
