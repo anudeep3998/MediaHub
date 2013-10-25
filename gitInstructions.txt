@@ -1,0 +1,11 @@
+To create GIT repository and upload it to remote:
+
+In IntelliJ IDEA menu: VCS -> Import into Version Control -> Create Git Repository
+In pop up window select your project and click ok.
+Commit all necessary files to you local branch master
+Open Git Bash and navigate to project folder e.g cd "D:\projects\TestProject"
+In Git Bash: git remote add origin http//IP/path/to/repository
+In Git Bash: git push origin master
+In IntelliJ IDEA right-click on project select Synchronize 'TestProject'
+In IntelliJ IDEA right-click on project select Git -> Repository -> Branches -> origin/master -> Checkout as new local branch
+Now you should be able to do pull/push using IntelliJ IDEA plugin.
