@@ -17,5 +17,4 @@ public class SQLite {
         }
         System.out.println("Opened database successfully");
     }
-
 }

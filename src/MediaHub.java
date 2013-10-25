@@ -10,6 +10,7 @@ import org.jaudiotagger.tag.TagField;
 import org.jaudiotagger.tag.datatype.DataTypes;
 import org.jaudiotagger.tag.id3.ID3v23Frame;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC;
+import utils.logging.CustomLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -25,15 +26,17 @@ import static org.jaudiotagger.tag.FieldKey.*;
  * Created by Phoenix on 10/24/13.
  */
 public class MediaHub {
-    static int count = 0;
+    static int count = 0,count2=0;
     private final static Logger Log = Logger.getLogger(MediaHub.class.getName());
 
     public static void main(String[] args) throws IOException {
         final File folder = new File("C:\\Users\\user\\Music");
-        //listFilesForFolder(folder);
+
 //        System.out.println("Hello World");
         SQLite sqLite = new SQLite();
         sqLite.setupConnection();
+        CustomLogger.setup();
+        listFilesForFolder(folder);
     }
 
     public static void listFilesForFolder(final File folder) throws IOException {
@@ -52,17 +55,18 @@ public class MediaHub {
                         tag = audioFile.getTag();
                         audioHeader = audioFile.getAudioHeader();
                         //audioFile.getFile().getAbsolutePath();
-                        TagField coverArtField =
+                        /*TagField coverArtField =
                                 tag.getFirstField(COVER_ART);
                         FrameBodyAPIC body = (FrameBodyAPIC) ((ID3v23Frame) coverArtField).getBody();
                         byte[] imageRawData = (byte[]) body.getObjectValue(DataTypes.OBJ_PICTURE_DATA);
                         BufferedImage bi = ImageIO.read(ImageIO.createImageInputStream(new
-                                ByteArrayInputStream(imageRawData)));
+                                ByteArrayInputStream(imageRawData)));*/
 
                         System.out.println((++count) + ". " + tag.getFirst(TITLE) + "-> " + audioHeader.getTrackLength() + " is at -> "
                                 + audioFile.getFile().getAbsolutePath());
                     } catch (CannotReadException e) {
                         e.printStackTrace();
+                        Log.warning("Could not read file : ");
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (TagException e) {
@@ -76,7 +80,8 @@ public class MediaHub {
                 }
             }
         }
-        Desktop.getDesktop().open(new File("C:\\Users\\user\\Music\\04 apologize.mp3"));
+//        Log.info("Opening media File : " + (++count2)+" in "+ folder.getAbsolutePath());
+//        Desktop.getDesktop().open(new File("C:\\Users\\user\\Music\\04 apologize.mp3"));
 
     }
 

@@ -17,8 +17,8 @@ public class CustomLogger {
     static public void setup() throws IOException {
 
         // Get the global logger to configure it
+        LogManager.getLogManager().reset();
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
         logger.setLevel(Level.INFO);
         fileTxt = new FileHandler("Logging.txt");
         fileHTML = new FileHandler("Logging.html");
